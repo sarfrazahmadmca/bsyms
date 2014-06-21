@@ -15,7 +15,7 @@ csv_file='/home/learnomatics/python_codes/share.csv'
 def getMaxPriceByCompany():
     try:
         share_doc=open(csv_file,'r')  #open the csv file in read mode
-        print share_doc
+        
     except IOError as e:
         print e
         sys.exit()
@@ -35,7 +35,8 @@ def getMaxPriceByCompany():
 
     output={}
     for key , val in data_dic.items():
-        print key , ":" , data_dic[key]
+        print str.center(key,40) 
+        print 'Max Price =', data_dic[key][0],  'Year = ',data_dic[key][1] ,  "Month = ",data_dic[key][2]
                   # print the max share prices with the company name, month and year
         output[key]={'price':data_dic[key][0],'year':data_dic[key][1],'month':data_dic[key][2]} #converting ordereddict to a simple dict for making test cases simple
 
