@@ -4,22 +4,21 @@ import csv # python csv module is used to manipulate csv files
 from collections import OrderedDict, namedtuple  # OrderedDict to traverse the dict in the same order they are created or elements are inserted                                                 #pass values in namedtuple and it will itself assign the values to names as per order of values
 
 #file_path='/home/learnomatics/python_codes/share.csv'
-csv_file='/home/learnomatics/python_codes/share.csv'
-
-
-
-
-
-
+csv_file='share.csv'
 
 def getMaxPriceByCompany():
     try:
-        share_doc=open(csv_file,'r')  #open the csv file in read mode
-        
+        share_doc=open(sys.argv[1],'r')                  #open the csv file in read mode
+    except IndexError as e:                               #if user doesn't pass a file path it will take the default file share.csv
+        print e
+        print " Please enter the path of file from which you wanna find the max values from command line"
+        share_doc=open(csv_file,'r')                               
     except IOError as e:
         print e
-        sys.exit()
-    doc=csv.reader(share_doc)        #csv.reader
+        print " Please enter Valid path for file from which you wanna find the max values from command line"
+        share_doc=open(csv_file,'r')                       #if system doesn't find file path it will take the default file share.csv
+    print share_doc    
+    doc=csv.reader(share_doc)       
     labels=namedtuple('max_price', 'price year month')     # create a namedtuple with price year and month fields
     company_names=next(doc)[2:]                         #next method is used to read a line from csv.reader object. 
     data_dic=OrderedDict()                              # an order dict return the data in the manner it is created
